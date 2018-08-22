@@ -3,3 +3,21 @@
   padding: 25rem 0;
   margin-top: -20vh;
 }
+
+.section-features {
+  padding: 20rem 0;
+  background-image: linear-gradient(to right bottom, rgba($color-primary-light, 0.8), rgba($color-primary-dark, 0.8)), url(../img/nat-4.png);
+  background-size: cover;
+
+  // SKEW SECTION TRICK
+
+  // 1st skew the entire section
+  transform: skewY(-7deg);
+  // 2nd move the section up to get rid of the white space
+  margin-top: -10rem;
+  // 3rd skew all the direct children of the section
+  & > * {
+    transform: skewY(7deg);
+  }
+
+}
