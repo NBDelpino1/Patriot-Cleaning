@@ -1,15 +1,14 @@
 .card {
-
+  // FUNCTIONALITY
   //ADD PERSPECTIVE SO CARD APPEARS TO COME OUT DURING ANIMATION (lower the value the more dramatic the effect hence why high value given)
   perspective: 150rem;
   -moz-perspective: 150rem; /* giving Firefox some love */
   position: relative;
-  height:50rem; /* need this because card height collapses due to child positioning */
+  height:52rem; /* need this because card height collapses due to child positioning */
 
   &__side {
-    color: #fff;
     font-size: 2rem;
-    height:50rem;
+    height:52rem;
     //CARD ROTATION 180deg on Y axis
     transition: all .8s ease;
     position: absolute;
@@ -18,6 +17,7 @@
     width: 100%; /* Fix width issue caused by positioning */
     backface-visibility: hidden; /* Hide back of card */
     border-radius: 3px;
+    overflow: hidden; // this will fix the problem of the card image overflowing the card causing the 3px card border not to show
     box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
 
     &--front {
@@ -37,11 +37,86 @@
   }
 
   &:hover &__side--front {
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
   }
 
   &:hover &__side--back {
     transform: rotateY(0);
+  }
+
+  // FRONT SIDE STYLING
+
+  &__picture {
+    background-size: cover;
+    height: 23rem;
+    -webkit-clip-path: polygon(0 0,100% 0, 100% 85%, 0 100%);
+    clip-path: polygon(0 0,100% 0, 100% 85%, 0 100%);
+
+    //TRICK - blend gradient with image
+    background-blend-mode: screen;
+
+    &--1 {
+      background-image: linear-gradient(to right bottom, $color-secondary-light, $color-secondary-dark),
+      url(../img/spec-1.png);
+    }
+
+    &--2 {
+      background-image: url(../img/spec-1.png);
+    }
+
+    &--3 {
+      background-image: url(../img/spec-1.png);
+    }
+
+  }
+
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width:75%;
+  }
+
+  //TRICK - ONE ELEMENT TWO BOXES
+  &__heading-span {
+    padding: 1rem 1.5rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+
+    &--1 {
+      background-image: linear-gradient(to right bottom,
+              rgba($color-secondary-light,.85),
+              rgba($color-secondary-dark,.85));
+    }
+
+  }
+
+  &__details {
+    padding:3rem;
+
+    ul {
+      list-style: none;
+      width:80%;
+      margin: 0 auto;
+
+      li {
+        text-align: center;
+        font-size:1.5rem;
+        padding: 1rem;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+
+      }
+
+    }
+
   }
 
 }
