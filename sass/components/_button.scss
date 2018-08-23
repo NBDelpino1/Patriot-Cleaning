@@ -28,10 +28,20 @@
   &--white {
     background-color: $color-white;
     color: $color-grey-dark;
-    width: 28rem;
+    //width: 28rem;
 
     &::after {
       background-color: $color-white;
+    }
+  }
+
+  &--blue {
+    background-color: $color-primary;
+    color: $color-white;
+    //width: 28rem;
+
+    &::after {
+      background-color: $color-primary;
     }
   }
 
