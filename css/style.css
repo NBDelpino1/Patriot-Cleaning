@@ -1,3 +1,19 @@
+/*
+0 - 600PX:  Phone
+600 - 900px:  Tablet portrait
+900  - 1200px: Tablet landscape
+[1200 - 1800] is where normal styles apply
+1800px +: Big desktop
+
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+1em = 16px
+Using em instead of rem because studies have shown it's better to use em inside media queries (contributes to accessibility factor)
+*/
 @keyframes moveInLeft {
   0% {
     opacity: 0;
@@ -34,11 +50,25 @@
   box-sizing: inherit; }
 
 html {
-  /* REM DEFINITION: root font-size value to make life easier (less calculations),
+  /*
+  REM DEFINITION: root font-size value to make life easier (less calculations),
   using percentage value in case user changes their default font sizing,
   for page using 1 rem = 10px therefore 16px(browser default) / 10px = 62.5%
   */
-  font-size: 62.5%; }
+  font-size: 62.5%;
+  /*
+  did not include one for ophone because it is 50% same as tab-port so redundant
+ media queries placed in the specific order (larger before smaller) below to avoid conflicts
+ */ }
+  @media (max-width: 75em) {
+    html {
+      font-size: 56.25%; } }
+  @media (max-width: 56.25em) {
+    html {
+      font-size: 50%; } }
+  @media (min-width: 112.5em) {
+    html {
+      font-size: 75%; } }
 
 body {
   box-sizing: border-box; }
