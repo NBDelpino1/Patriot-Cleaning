@@ -7,6 +7,10 @@
   background-color: rgba($color-black, .8);
   z-index: 9999;
 
+  // TRICK HIDE AND SHOW POPUP PT-1 - HIDE POPUP. COULDN'T USE DISPLAY HIDDEN BECAUSE NEED TO ANIMATE IT
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
 
   //TRICK: USING TABLE TO MAKE BOZES SAME HIGHT TECHNICALLY
   &__content {
@@ -18,6 +22,10 @@
     border-radius: 3px;
     display: table;
     overflow: hidden;
+    //TRICK HIDE AND SHOW POPUP PT-4 - SCALE COMPONENT DOWN (FOR MOVE IN EFFECT)
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.25); // need to repeat translate because cannot have two separate transforms at same time (already used in mixin)
+    transition: all .4s .2s;
   }
 
   &__left {
@@ -56,10 +64,41 @@
     -moz-hyphens: auto;
     -ms-hyphens: auto;
     -webkit-hyphens: auto;
-
     hyphens: auto;
+  }
+
+  //TRICK HIDE AND SHOW POPUP PT-2 - AS SOON AS ELEMENT BECOMES AVAILABLE, APPLY PSEUDO STYLES ON IT SO IT "APPEARS'"
+  //OPEN STATES
+  &:target{
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:target &__content {
+    //TRICK HIDE AND SHOW POPUP PT-5 - SCALE COMPONENT BACK UP (COMPLETE MOVE IN EFFECT)
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  //TRICK HIDE AND SHOW POPUP PT-3 - CLOSING BUTTON WILL REMOVE THE TARGET FROM THE POP UP SO IT LOOSES IT'S STYLES AND GOES BACK TO IT'S INITIAL STATE
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark-1;
+      position: absolute;
+      top:2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all .2s;
+      line-height: 1;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
 
   }
 
 }
-
